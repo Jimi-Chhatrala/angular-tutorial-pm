@@ -60,3 +60,6 @@ For more information on using the Angular CLI, including detailed command refere
 # angular-tutorial-pm
 
 # 1-angular-inline-template-and-style
+```
+ng g c components/InlineTemplateAndStyleComp --inline-style --inline-template
+```
