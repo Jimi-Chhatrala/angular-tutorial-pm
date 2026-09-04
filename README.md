@@ -63,3 +63,4 @@ For more information on using the Angular CLI, including detailed command refere
 ```
 ng g c components/InlineTemplateAndStyleComp --inline-style --inline-template
 ```
+# 2-angular-interpolation
