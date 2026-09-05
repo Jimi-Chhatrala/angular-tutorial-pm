@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { EventHandlingComp } from './components/event-handling-comp/event-handling-comp';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [EventHandlingComp],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

@@ -1,0 +1,76 @@
+<p>event-handling-comp works!</p>
+<hr />
+<button type="button" (click)="onClickEvent('Angular Tutorial', 3)">Click Event</button>
+<h1>{{ name }}</h1>
+<hr />
+<button type="button" (dblclick)="onClickEventObj($event)">On Double Click Event</button>
+<hr />
+<span (mouseover)="onMouseOverEvent()" [style.background-color]="'red'">MOUSE OVER</span>
+<hr />
+<span (mouseout)="onMouseOutEvent()" [style.background-color]="'blue'">MOUSE OUT</span>
+<hr />
+<span (mouseleave)="onMouseLeaveEvent()" [style.background-color]="'pink'">MOUSE LEAVE</span>
+<hr />
+<span (mousemove)="onMouseDownUpMoveEvent($event)" [style.background-color]="'gray'"
+  >MOUSE MOVE</span
+>
+<hr />
+<span (mouseup)="onMouseDownUpMoveEvent($event)" [style.background-color]="'orange'">MOUSE UP</span>
+<hr />
+<span (mousedown)="onMouseDownUpMoveEvent($event)" [style.background-color]="'green'"
+  >MOUSE DOWN</span
+>
+<hr />
+<button type="button" (click)="count = count + 1">Count: {{ count }}</button>
+<hr />
+<button type="button" (click)="add(10, 20)">Add</button>
+<hr />
+<input type="text" (input)="onInput($event)" placeholder="Type something to see below." />
+<p>{{ inputValue }}</p>
+<hr />
+<input type="text" placeholder="Ok Key Down Event" (keydown)="onKeyDown($event)" />
+<hr />
+<input type="text" (keydown.enter)="onEnterKeyDown()" placeholder="On Enter Key Down" />
+<hr />
+<input type="text" (keydown.escape)="onEscapeKeyDown()" placeholder="On Escape Key Down" />
+<hr />
+<select (change)="onSelectChange($event)">
+  <option value="">Select a food</option>
+  <option value="Apple">Apple</option>
+  <option value="Banana">Banana</option>
+  <option value="Carrot">Carrot</option>
+</select>
+<hr />
+<form (submit)="onFormSubmit()">
+  <p>(submit)</p>
+  <input type="text" />
+  <button type="submit">Submit</button>
+</form>
+<hr />
+<form (ngSubmit)="onFormSubmit()">
+  <p>(ngSubmit)</p>
+  <input type="text" />
+  <button type="submit">Submit</button>
+</form>
+<hr>
+<h2>Count: {{ count }}</h2>
+
+<button (click)="increase()">+</button>
+<button (click)="decrease()">-</button>
+<hr>
+<h2>Hello {{ username }}</h2>
+
+<button (click)="changeUserName()">
+  Change User Name
+</button>
+
+<hr>
+<div
+  (mouseleave)="onMouseLeaveParentChild($event)"
+  (mouseout)="onMouseOutParentChild($event)"
+  [style.background-color]="'gold'"
+>
+  Parent
+  <br>
+  <button>Child</button>
+</div>
