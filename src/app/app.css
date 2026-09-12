@@ -1,0 +1,37 @@
+.myColor {
+  color: orange;
+}
+
+.myWriting {
+  font-family: comic sans ms;
+}
+
+.active {
+  color: blue;
+}
+
+.error {
+  color: red;
+}
+
+.disabled {
+  background-color: gray;
+}
+
+.large {
+  font-size: 100px;
+}
+
+.highlighted {
+  background-color: green;
+}
+
+.selected {
+  background-color: blue;
+  color: white;
+}
+
+.not-selected {
+  background-color: gray;
+  color: black;
+}

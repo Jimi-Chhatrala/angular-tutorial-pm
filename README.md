@@ -66,3 +66,4 @@ ng g c components/InlineTemplateAndStyleComp --inline-style --inline-template
 # 2-angular-interpolation
 # 3-event-handling
 # 4-angular-property-binding
+# 5-angular-class-binding
