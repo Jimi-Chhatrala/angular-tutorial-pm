@@ -67,3 +67,4 @@ ng g c components/InlineTemplateAndStyleComp --inline-style --inline-template
 # 3-event-handling
 # 4-angular-property-binding
 # 5-angular-class-binding
+# 6-angular-ngclass-directive
