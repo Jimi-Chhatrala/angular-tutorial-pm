@@ -13,6 +13,12 @@ export class App {
   public cssClass = 'myColor myWriting';
   public cssArray = ['myColor', 'myWriting'];
   public myNewClass = new myClass();
+  status = 'active';
+  isActive = true;
+  size = 'large';
+
+  classes = [this.isActive ? 'active' : 'inactive', this.size];
+  isError = true;
 }
 
 class myClass {

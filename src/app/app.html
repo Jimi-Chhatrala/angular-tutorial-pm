@@ -19,3 +19,27 @@
 <h1 [ngClass]="myNewClass">Hello World</h1>
 <hr />
 <h1 ngClass="myColor myWriting">Hello Universe</h1>
+<hr />
+<div
+  [ngClass]="{
+    active: status === 'active',
+    inactive: status === 'inactive',
+    blocked: status === 'blocked',
+  }"
+>
+  User status: {{ status }}
+</div>
+<hr />
+<div [ngClass]="classes">Hello</div>
+<hr />
+<div [ngClass]="isActive ? 'active' : 'inactive'">Hello</div>
+<hr />
+<div
+  class="card"
+  [ngClass]="{
+    active: isActive,
+    error: isError,
+  }"
+>
+  Hello
+</div>

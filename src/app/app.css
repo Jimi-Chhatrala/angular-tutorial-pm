@@ -5,3 +5,27 @@
 .myWriting {
   font-family: cooper;
 }
+
+.active {
+  color: green;
+}
+
+.inactive {
+  color: gray;
+}
+
+.blocked {
+  color: red;
+}
+
+.large {
+  font-size: 100px;
+}
+
+.card {
+  background-color: aqua;
+}
+
+.error {
+  text-decoration: line-through;
+}
