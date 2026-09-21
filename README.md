@@ -70,4 +70,4 @@ ng g c components/InlineTemplateAndStyleComp --inline-style --inline-template
 # 6-angular-ngclass-directive
 # 7-angular-ngstyle-directive
 # 8-template-reference-variable
-#9-plus-minus-counter-app
+# 9-plus-minus-counter-app
