@@ -16,4 +16,17 @@ export class App {
   ternaryDisplayCondition = false;
   username = 'John';
   fruit = 'Banana';
+  isLogging = false;
+  manageLoginLogout(isLoggedIn: boolean) {
+    this.isLogging = isLoggedIn;
+  }
+  age = 20;
+  isLoggedIn = true;
+  isAdmin = true;
+  isManager = true;
+  user = {
+    name: 'John',
+    age: 25,
+  };
+  isVisible = true;
 }

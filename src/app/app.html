@@ -49,3 +49,52 @@
 <h1 *ngIf="fruit === 'Apple'">Your selected fruit is {{ fruit }}.</h1>
 <h1 *ngIf="fruit === 'Banana'">Your selected fruit is {{ fruit }}.</h1>
 <h1 *ngIf="fruit === 'Carrot'">Your selected fruit is {{ fruit }}.</h1>
+
+<hr />
+
+<button *ngIf="isLogging" (click)="manageLoginLogout(false)">Logout</button>
+
+<button *ngIf="!isLogging" (click)="manageLoginLogout(true)">Login</button>
+
+<div *ngIf="isLogging; else loginMessage">
+  <h2>Dashboard</h2>
+  <p>Welcome to your dashboard.</p>
+</div>
+
+<ng-template #loginMessage>
+  <h2>Please Login</h2>
+</ng-template>
+<hr />
+
+<p *ngIf="age >= 18">You are an adult.</p>
+
+<hr />
+
+<p *ngIf="isLoggedIn && isAdmin">Admin Panel</p>
+
+<hr />
+
+<p *ngIf="isAdmin || isManager">You have access to this section.</p>
+
+<hr />
+
+<div *ngIf="user">
+  <h2>{{ user.name }}</h2>
+  <p>Age: {{ user.age }}</p>
+</div>
+
+<hr />
+
+<p [style.display]="isVisible ? 'block' : 'none'">Hello style.display</p>
+
+<p *ngIf="isVisible">Hello ngIf</p>
+
+<p [hidden]="!isVisible">Hello hidden</p>
+
+<hr />
+
+@if (isLoggedIn) {
+  <p>Welcome!</p>
+} @else {
+  <p>Please log in.</p>
+}
