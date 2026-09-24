@@ -72,3 +72,4 @@ ng g c components/InlineTemplateAndStyleComp --inline-style --inline-template
 # 8-template-reference-variable
 # 9-plus-minus-counter-app
 # 10-two-way-data-binding
+# 11-ngif-directive
