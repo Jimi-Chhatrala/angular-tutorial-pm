@@ -29,4 +29,7 @@ export class App {
     age: 25,
   };
   isVisible = true;
+  condition = true;
+  score = 75;
+  isLoading = true;
 }

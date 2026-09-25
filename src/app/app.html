@@ -98,3 +98,78 @@
 } @else {
   <p>Please log in.</p>
 }
+
+<hr />
+
+@if (condition) {
+  <p>This is displayed when condition is true.</p>
+}
+
+<hr />
+
+@if (isLoggedIn) {
+  <p>Welcome back!</p>
+} @else {
+  <p>Please log in.</p>
+}
+
+<hr />
+
+@if (age >= 18) {
+  <p>You are an adult.</p>
+}
+
+<hr />
+
+@if (isLoggedIn && isAdmin) {
+  <p>Welcome to the Admin Panel.</p>
+}
+
+<hr />
+
+@if (isAdmin || isManager) {
+  <p>You have access.</p>
+}
+
+<hr />
+
+@if (score >= 90) {
+  <p>Grade A</p>
+} @else if (score >= 75) {
+  <p>Grade B</p>
+} @else if (score >= 50) {
+  <p>Grade C</p>
+} @else {
+  <p>Fail</p>
+}
+
+<hr />
+
+@if (user) {
+  <h2>{{ user.name }}</h2>
+  <p>Age: {{ user.age }}</p>
+}
+
+<hr />
+
+@if (isLoading) {
+  <p>Loading...</p>
+} @else {
+  <p>Data loaded successfully!</p>
+}
+
+<hr />
+
+@if (isLoggedIn) {
+  <h2>Dashboard</h2>
+  <p>Welcome back!</p>
+  <button>Logout</button>
+}
+
+<hr />
+
+<p *ngIf="isLoggedIn">Welcome *ngIf</p>
+
+@if (isLoggedIn) {
+  <p>Welcome @ if</p>
+}
