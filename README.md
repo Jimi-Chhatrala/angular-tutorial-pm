@@ -74,3 +74,4 @@ ng g c components/InlineTemplateAndStyleComp --inline-style --inline-template
 # 10-two-way-data-binding
 # 11-ngif-directive
 # 12-ngswitch-directive
+# 13-ngfor-directive
