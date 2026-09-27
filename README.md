@@ -75,3 +75,4 @@ ng g c components/InlineTemplateAndStyleComp --inline-style --inline-template
 # 11-ngif-directive
 # 12-ngswitch-directive
 # 13-ngfor-directive
+# 14-nested-ngfor-directive
