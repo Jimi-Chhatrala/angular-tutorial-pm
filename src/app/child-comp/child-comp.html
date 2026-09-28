@@ -1,0 +1,16 @@
+<p>child-comp works!</p>
+<h2>{{ name }}</h2>
+
+<ol>
+  @for (fruit of fruits; track $index) {
+    <li>{{ fruit }}</li>
+  }
+</ol>
+
+@if (userData.id) {
+  <h2>User Data</h2>
+  <p>Id: {{ userData.id }}</p>
+  <p>Name: {{ userData.name }}</p>
+  <p>Age: {{ userData.age }}</p>
+  <p>Is Married: {{ userData.isMarried ? 'Yes' : 'No' }}</p>
+}

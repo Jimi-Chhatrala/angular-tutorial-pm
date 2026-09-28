@@ -1,12 +1,23 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChildComp } from './child-comp/child-comp';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [ChildComp],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
 export class App {
   protected readonly title = signal('angular-tutorial-pm');
+  name = 'Learning Angular';
+  onClickChangeName() {
+    this.name = 'Learning to pass data from parent to child component.';
+  }
+  fruits = ['Apple', 'Banana', 'Mango', 'Grapes'];
+  userData = {
+    id: 1,
+    name: 'Abc',
+    age: 25,
+    isMarried: false,
+  };
 }
