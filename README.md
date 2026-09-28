@@ -78,3 +78,4 @@ ng g c components/InlineTemplateAndStyleComp --inline-style --inline-template
 # 14-nested-ngfor-directive
 # 15-use-bootstrap-jquery
 # 16-pass-data-from-parent-to-child-component
+# 17-pass-data-from-child-to-parent-component
