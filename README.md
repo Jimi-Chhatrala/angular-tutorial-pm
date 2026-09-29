@@ -79,3 +79,7 @@ ng g c components/InlineTemplateAndStyleComp --inline-style --inline-template
 # 15-use-bootstrap-jquery
 # 16-pass-data-from-parent-to-child-component
 # 17-pass-data-from-child-to-parent-component
+# 18-install-and-use-tailwind-css
+```
+ng add tailwindcss
+```
