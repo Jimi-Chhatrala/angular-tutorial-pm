@@ -14,3 +14,29 @@
   <p>Age: {{ userData.age }}</p>
   <p>Is Married: {{ userData.isMarried ? 'Yes' : 'No' }}</p>
 }
+
+@if (age) {
+  <h1>Age: {{ age }} is of type {{ typeof age }}</h1>
+}
+
+@if (name && age) {
+  <h2>{{ name }}</h2>
+
+  <p>Age: {{ age }}</p>
+
+  @if (admin) {
+    <p>Administrator</p>
+  }
+}
+
+@if (user) {
+  <h2>{{ user.name }}</h2>
+
+  <p>Age: {{ user.age }}</p>
+
+  <p>City: {{ user.city }}</p>
+}
+
+@if (framework()) {
+  <h2>Learning {{ framework() }}</h2>
+}

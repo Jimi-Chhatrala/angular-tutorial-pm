@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 
 @Component({
   imports: [],
@@ -10,4 +10,12 @@ export class ChildComp {
   @Input('name') name: string = '';
   @Input('fruits') fruits: string[] = [];
   @Input('userData') userData: any = {};
+  @Input() age: number | string = 0;
+  @Input() admin = false;
+  @Input() user!: {
+    name: string;
+    age: number;
+    city: string;
+  };
+  framework = input('');
 }

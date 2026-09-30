@@ -20,4 +20,13 @@ export class App {
     age: 25,
     isMarried: false,
   };
+  age = 25;
+  user_name = 'John';
+  user_age = 25;
+  is_admin = true;
+  user = {
+    name: 'Johnny',
+    age: 55,
+    city: 'Surat',
+  };
 }
