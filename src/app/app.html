@@ -3,3 +3,17 @@
 <hr />
 <h2>{{ message }}</h2>
 <app-child-comp (childEvent)="message = $event"></app-child-comp>
+
+<hr />
+
+<h3>{{ receivedMessage }}</h3>
+<app-child-comp (messageEvent)="receiveMessage($event)"></app-child-comp>
+
+<hr />
+
+<h3>{{ count }}</h3>
+<app-child-comp (countEvent)="receiveCount($event)"> </app-child-comp>
+
+<hr />
+<h4>Name: {{ userData?.name }}, Age: {{ userData?.age }}</h4>
+<app-child-comp (userEvent)="receiveUser($event)"> </app-child-comp>

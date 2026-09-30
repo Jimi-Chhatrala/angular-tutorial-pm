@@ -10,4 +10,19 @@ import { ChildComp } from './child-comp/child-comp';
 export class App {
   protected readonly title = signal('angular-tutorial-pm');
   message = '';
+
+  receivedMessage = '';
+  receiveMessage(data: string) {
+    this.receivedMessage = data;
+  }
+
+  count = 0;
+  receiveCount(value: number) {
+    this.count = value;
+  }
+
+  userData: { name: string; age: number } | null = null;
+  receiveUser(user: { name: string; age: number }) {
+    this.userData = user;
+  }
 }
