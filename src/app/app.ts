@@ -13,6 +13,9 @@ import {
 import { Component, signal } from '@angular/core';
 import { ReversePipe } from './pipes/reverse-pipe';
 import { GreetPipe } from './pipes/greet-pipe';
+import { MathPowerPipe } from './pipes/math-power-pipe';
+import { AddCgstSgstPipe } from './pipes/add-cgst-sgst-pipe';
+import { CurrencyConverterPipe } from './pipes/currency-converter-pipe';
 
 @Component({
   imports: [
@@ -28,6 +31,9 @@ import { GreetPipe } from './pipes/greet-pipe';
     NgFor,
     ReversePipe,
     GreetPipe,
+    MathPowerPipe,
+    AddCgstSgstPipe,
+    CurrencyConverterPipe,
   ],
   selector: 'app-root',
   styleUrl: './app.css',
