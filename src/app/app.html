@@ -127,3 +127,27 @@
 <h1>{{ today | date: 'd-M-y' }}</h1>
 <hr />
 <h1>{{ today | date: 'M-d-y' }}</h1>
+<hr />
+<h1>{{ 1.234 | number: '2.5-6' }}</h1>
+<hr />
+<h1>{{ 1.234 | number: '3.7-8' }}</h1>
+<hr />
+<h1>{{ 2.789 | number: '1.1-2' }}</h1>
+<hr />
+<h1>{{ 0.5 | percent }}</h1>
+<hr />
+<h1>{{ 50 | percent }}</h1>
+<hr />
+<h1>{{ 0.5 * 100 }}</h1>
+<hr />
+<h1>{{ 25 | currency }}</h1>
+<hr />
+<h1>{{ 25 | currency: 'EUR' }}</h1>
+<hr />
+<h1>{{ 25 | currency: 'GBP' }}</h1>
+<hr />
+<h1>{{ 25 | currency: 'GBP' : 'code' }}</h1>
+<hr />
+<h1>{{ 25 | currency: 'EUR' : 'symbol' }}</h1>
+<hr />
+<h1>{{ 25 | currency: 'EUR' : 'symbol' : '3.5-6' }}</h1>
