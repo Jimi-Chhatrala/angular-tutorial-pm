@@ -1,0 +1,13 @@
+<p>student-data-comp works!</p>
+<table height="200" width="200">
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Class</th>
+  </tr>
+  <tr *ngFor="let student of studentsList">
+    <td>{{ student.name }}</td>
+    <td>{{ student.age }}</td>
+    <td>{{ student.class }}</td>
+  </tr>
+</table>
