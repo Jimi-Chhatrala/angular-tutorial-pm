@@ -86,3 +86,4 @@ ng add tailwindcss
 # 19-pipes-in-angular
 # 20-service-and-dependency-injection
 # 21-fetch-and-display-data-by-calling-api
+# 22-template-driven-forms
