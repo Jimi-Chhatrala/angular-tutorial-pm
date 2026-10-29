@@ -1,18 +1,17 @@
 .page {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 2rem 1rem;
+  padding: clamp(1rem, 4vw, 3rem);
   background:
     radial-gradient(ellipse at top left, #dbeafe 0, transparent 42%),
     #f4f7fb;
 }
 
 .form-card {
-  width: min(100%, 28rem);
-  padding: clamp(1.5rem, 5vw, 2.5rem);
+  width: min(100%, 88rem);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
   border: 1px solid #e4eaf2;
-  border-radius: 1.25rem;
+  border-radius: 1.5rem;
   background: #fff;
   box-shadow: 0 1.25rem 3rem rgb(22 42 74 / 10%);
 }
@@ -41,11 +40,46 @@ h1 {
 
 form {
   display: grid;
-  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.debug-values,
+.state-examples {
+  grid-column: 1 / -1;
+}
+
+.debug-values {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.debug-panel {
+  min-width: 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+}
+
+.debug-panel h2 {
+  margin: 0 0 0.5rem;
+  color: #26364d;
+  font-size: 0.875rem;
+}
+
+.debug-panel pre {
+  margin: 0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  color: #475569;
+  font: 0.875rem/1.6 ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
 .field {
   display: grid;
+  align-content: start;
   gap: 0.5rem;
 }
 
@@ -82,7 +116,101 @@ input:focus {
   font-size: 0.8125rem;
 }
 
+.email-hint {
+  margin: 0;
+}
+
+.checking {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  color: #1d4ed8;
+  font-size: 0.8125rem;
+}
+
+.spinner {
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 2px solid #bfdbfe;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.state-examples {
+  padding: 1rem;
+  border: 1px solid #dbe4f0;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+}
+
+.state-examples h2 {
+  margin: 0;
+  color: #26364d;
+  font-size: 1rem;
+}
+
+.state-hint,
+.form-state {
+  color: #64748b;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.state-hint {
+  margin: 0.5rem 0 0.75rem;
+}
+
+.state-grid {
+  font-size: 0.875rem;
+}
+
+.state-row {
+  display: grid;
+  grid-template-columns: minmax(5rem, 1.2fr) repeat(7, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.75rem 0.25rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.state-row span:not(:first-child) {
+  text-align: center;
+}
+
+.state-row span {
+  color: #475569;
+}
+
+.state-row span:first-child {
+  color: #26364d;
+  font-weight: 600;
+}
+
+.state-heading span {
+  color: #64748b;
+  font-weight: 700;
+}
+
+.state-examples {
+  padding: 1.5rem;
+}
+
+.form-state {
+  margin: 0.75rem 0 0;
+  overflow-wrap: anywhere;
+}
+
 button {
+  grid-column: 1 / -1;
+  justify-self: end;
+  min-width: 12rem;
   min-height: 3rem;
   margin-top: 0.25rem;
   border: 0;
@@ -115,4 +243,54 @@ button:disabled {
   color: #166534;
   font-size: 0.9rem;
   line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  .form-card {
+    padding: 1.5rem;
+  }
+
+  form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .state-grid {
+    overflow-x: auto;
+  }
+
+  .state-row {
+    min-width: 40rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding: 0.75rem;
+  }
+
+  .form-card {
+    padding: 1.25rem;
+    border-radius: 1rem;
+  }
+
+  form,
+  .debug-values {
+    grid-template-columns: 1fr;
+  }
+
+  .field,
+  .debug-values,
+  .state-examples,
+  button {
+    grid-column: 1;
+  }
+
+  .state-examples {
+    padding: 1rem;
+  }
+
+  button {
+    width: 100%;
+  }
 }

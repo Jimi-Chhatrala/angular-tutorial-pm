@@ -7,13 +7,19 @@
     <form
       #profileForm="ngForm"
       (ngSubmit)="onSubmit(profileForm)"
-      /* novalidate */
       ngNativeValidate
     >
-      profileForm.value:=>{{ profileForm.value | json }}
-      <hr />
-      student2:=> {{ student2 | json }}
-      <hr />
+      <section class="debug-values" aria-label="Current form values">
+        <div class="debug-panel">
+          <h2>Form value</h2>
+          <pre>{{ displayFormValue(profileForm) | json }}</pre>
+        </div>
+        <div class="debug-panel">
+          <h2>Student model</h2>
+          <pre>{{ student2 | json }}</pre>
+        </div>
+      </section>
+
       <div class="field">
         <label for="name">Name</label>
         <input
@@ -28,9 +34,18 @@
           #nameControl="ngModel"
           ngModel
           required
+          minlength="3"
+          maxlength="30"
         />
+        <p class="state-hint">Name must be between 3 and 30 characters.</p>
         @if (nameControl.invalid && (nameControl.touched || profileForm.submitted)) {
-          <p class="error" role="alert">Please enter your name.</p>
+          @if (nameControl.hasError('required')) {
+            <p class="error" role="alert">Please enter your name.</p>
+          } @else if (nameControl.hasError('minlength')) {
+            <p class="error" role="alert">Name must be at least 3 characters.</p>
+          } @else if (nameControl.hasError('maxlength')) {
+            <p class="error" role="alert">Name cannot be longer than 30 characters.</p>
+          }
         }
       </div>
 
@@ -47,11 +62,75 @@
           /* [(ngModel)]="profile.email" */
           #emailControl="ngModel"
           ngModel
+          appEmailAvailability
           required
           email
+          maxlength="254"
+          [pattern]="completeEmailPattern"
         />
+        <p class="state-hint email-hint">
+          Enter a complete address such as name&#64;example.com. Availability is checked only
+          after the address is complete. Try taken&#64;example.com to see it fail.
+        </p>
+        @if (emailControl.pending) {
+          <p class="checking" role="status">
+            <span class="spinner" aria-hidden="true"></span>
+            Checking email availability…
+          </p>
+        }
         @if (emailControl.invalid && (emailControl.touched || profileForm.submitted)) {
-          <p class="error" role="alert">Please enter a valid email address.</p>
+          @if (emailControl.hasError('emailTaken')) {
+            <p class="error" role="alert">This demo email is already taken. Try another address.</p>
+          } 
+          <!-- @else if (emailControl.errors && emailControl.errors['required']) {
+            <p class="error" role="alert">Please enter your email addresssss.</p>
+          } -->
+          @else if (emailControl.hasError('required')) {
+            <p class="error" role="alert">Please enter your email address.</p>
+          } @else if (emailControl.hasError('maxlength')) {
+            <p class="error" role="alert">Email addresses must be 254 characters or fewer.</p>
+          } @else if (emailControl.hasError('pattern')) {
+            <p class="error" role="alert">
+              Enter a complete email address with a domain, such as name&#64;example.com.
+            </p>
+          } @else if (emailControl.hasError('email')) {
+            <p class="error" role="alert">Enter a valid email address, such as name@example.com.</p>
+          } @else {
+            <p class="error" role="alert">The email address could not be validated.</p>
+          }
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="new-password"
+          placeholder="Create a password"
+          [(ngModel)]="password"
+          #passwordControl="ngModel"
+          required
+          minlength="8"
+          maxlength="64"
+          [pattern]="passwordPattern"
+        />
+        <p class="state-hint">
+          Use 8–64 characters with an uppercase letter, a lowercase letter, a number, and a symbol.
+        </p>
+        @if (passwordControl.invalid && (passwordControl.touched || profileForm.submitted)) {
+          @if (passwordControl.hasError('required')) {
+            <p class="error" role="alert">Please enter a password.</p>
+          } @else if (passwordControl.hasError('minlength')) {
+            <p class="error" role="alert">Password must be at least 8 characters.</p>
+          } @else if (passwordControl.hasError('maxlength')) {
+            <p class="error" role="alert">Password cannot be longer than 64 characters.</p>
+          } @else if (passwordControl.hasError('pattern')) {
+            <p class="error" role="alert">
+              Include an uppercase letter, a lowercase letter, a number, and a symbol.
+            </p>
+          }
         }
       </div>
 
@@ -77,9 +156,75 @@
         }
       </div>
 
-      <button type="submit" 
-      /* [disabled]="profileForm.invalid" */
-      >Continue</button>
+      <section class="state-examples" aria-labelledby="state-title">
+        <h2 id="state-title">Form control state examples</h2>
+        <p class="state-hint">
+          Edit a field or focus and leave it to see how Angular updates its state.
+          “Pristine” is the correct spelling (not “prestine”).
+        </p>
+
+        <div class="state-grid">
+          <div class="state-row state-heading" aria-hidden="true">
+            <span>Control</span>
+            <span>Pristine</span>
+            <span>Dirty</span>
+            <span>Touched</span>
+            <span>Untouched</span>
+            <span>Valid</span>
+            <span>Invalid</span>
+            <span>Pending</span>
+          </div>
+          <div class="state-row">
+            <span>Name</span>
+            <span>{{ nameControl.pristine }}</span>
+            <span>{{ nameControl.dirty }}</span>
+            <span>{{ nameControl.touched }}</span>
+            <span>{{ nameControl.untouched }}</span>
+            <span>{{ nameControl.valid }}</span>
+            <span>{{ nameControl.invalid }}</span>
+            <span>{{ nameControl.pending }}</span>
+          </div>
+          <div class="state-row">
+            <span>Email</span>
+            <span>{{ emailControl.pristine }}</span>
+            <span>{{ emailControl.dirty }}</span>
+            <span>{{ emailControl.touched }}</span>
+            <span>{{ emailControl.untouched }}</span>
+            <span>{{ emailControl.valid }}</span>
+            <span>{{ emailControl.invalid }}</span>
+            <span>{{ emailControl.pending }}</span>
+          </div>
+          <div class="state-row">
+            <span>Age</span>
+            <span>{{ ageControl.pristine }}</span>
+            <span>{{ ageControl.dirty }}</span>
+            <span>{{ ageControl.touched }}</span>
+            <span>{{ ageControl.untouched }}</span>
+            <span>{{ ageControl.valid }}</span>
+            <span>{{ ageControl.invalid }}</span>
+            <span>{{ ageControl.pending }}</span>
+          </div>
+          <div class="state-row">
+            <span>Password</span>
+            <span>{{ passwordControl.pristine }}</span>
+            <span>{{ passwordControl.dirty }}</span>
+            <span>{{ passwordControl.touched }}</span>
+            <span>{{ passwordControl.untouched }}</span>
+            <span>{{ passwordControl.valid }}</span>
+            <span>{{ passwordControl.invalid }}</span>
+            <span>{{ passwordControl.pending }}</span>
+          </div>
+        </div>
+
+        <p class="form-state">
+          Form: pristine={{ profileForm.pristine }}, dirty={{ profileForm.dirty }},
+          touched={{ profileForm.touched }}, untouched={{ profileForm.untouched }},
+          valid={{ profileForm.valid }}, invalid={{ profileForm.invalid }},
+          pending={{ profileForm.pending }}, submitted={{ profileForm.submitted }}
+        </p>
+      </section>
+
+      <button type="submit">Continue</button>
     </form>
 
     @if (submittedProfile; as submitted) {
