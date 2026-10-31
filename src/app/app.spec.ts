@@ -17,7 +17,7 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render name, email, and age controls', async () => {
+  it('should render the profile controls, learning-goal radios, and experience dropdown', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
@@ -26,6 +26,71 @@ describe('App', () => {
     expect(compiled.querySelector('input[name="email"]')).toBeTruthy();
     expect(compiled.querySelector('input[name="password"]')).toBeTruthy();
     expect(compiled.querySelector('input[name="age"]')).toBeTruthy();
+    expect(compiled.querySelectorAll('input[name="learningGoal"][type="radio"]')).toHaveLength(3);
+    expect(compiled.querySelector('select[name="experienceLevel"]')).toBeTruthy();
+  });
+
+  it('should bind and require a learning goal and experience level', async () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const learningGoalControl = fixture.debugElement
+      .query(By.css('input[name="learningGoal"]'))
+      .injector.get(NgModel).control;
+    const experienceLevelControl = fixture.debugElement
+      .query(By.css('select[name="experienceLevel"]'))
+      .injector.get(NgModel).control;
+    expect(learningGoalControl.hasError('required')).toBe(true);
+    expect(experienceLevelControl.hasError('required')).toBe(true);
+
+    const learningGoal = compiled.querySelector<HTMLInputElement>(
+      'input[name="learningGoal"][value="career-development"]',
+    )!;
+    learningGoal.checked = true;
+    learningGoal.dispatchEvent(new Event('change', { bubbles: true }));
+
+    const experienceLevel = compiled.querySelector<HTMLSelectElement>(
+      'select[name="experienceLevel"]',
+    )!;
+    experienceLevel.value = 'intermediate';
+    experienceLevel.dispatchEvent(new Event('change', { bubbles: true }));
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const formValue = compiled.querySelector('.debug-panel pre')?.textContent;
+    expect(formValue).toContain('"learningGoal": "career-development"');
+    expect(formValue).toContain('"experienceLevel": "intermediate"');
+    expect(learningGoalControl.valid).toBe(true);
+    expect(experienceLevelControl.valid).toBe(true);
+    expect(compiled.querySelector<HTMLInputElement>('input[name="learningGoal"]')?.required).toBe(
+      true,
+    );
+    expect(experienceLevel.required).toBe(true);
+  });
+
+  it('should disable submission while email availability is pending', async () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const emailInput = compiled.querySelector<HTMLInputElement>('input[name="email"]')!;
+    const submitButton = compiled.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    emailInput.value = 'alex@example.com';
+    emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+    fixture.detectChanges();
+
+    const emailControl = fixture.debugElement
+      .query(By.css('input[name="email"]'))
+      .injector.get(NgModel).control;
+    expect(emailControl.pending).toBe(true);
+    expect(submitButton.disabled).toBe(true);
+
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(emailControl.pending).toBe(false);
+    expect(submitButton.disabled).toBe(false);
   });
 
   it('should enforce a name length between 3 and 30 characters', async () => {
@@ -117,6 +182,17 @@ describe('App', () => {
       input.dispatchEvent(new Event('input', { bubbles: true }));
     });
 
+    const learningGoal = compiled.querySelector<HTMLInputElement>(
+      'input[name="learningGoal"][value="career-development"]',
+    )!;
+    learningGoal.checked = true;
+    learningGoal.dispatchEvent(new Event('change', { bubbles: true }));
+    const experienceLevel = compiled.querySelector<HTMLSelectElement>(
+      'select[name="experienceLevel"]',
+    )!;
+    experienceLevel.value = 'beginner';
+    experienceLevel.dispatchEvent(new Event('change', { bubbles: true }));
+
     await fixture.whenStable();
     fixture.detectChanges();
     const submitButton = compiled.querySelector<HTMLButtonElement>('button[type="submit"]')!;
@@ -126,5 +202,9 @@ describe('App', () => {
     fixture.detectChanges();
 
     expect(compiled.querySelector('[role="status"]')?.textContent).toContain('Alex Morgan');
+    expect(compiled.querySelector('[role="status"]')?.textContent).toContain(
+      'career-development',
+    );
+    expect(compiled.querySelector('[role="status"]')?.textContent).toContain('beginner');
   });
 });

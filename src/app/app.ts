@@ -7,6 +7,14 @@ import {
   EmailAvailabilityValidator,
 } from './email-availability.directive';
 
+interface SubmittedProfile {
+  name: string;
+  email: string;
+  age: number | string;
+  learningGoal: string;
+  experienceLevel: string;
+}
+
 @Component({
   imports: [FormsModule, JsonPipe, EmailAvailabilityValidator],
   selector: 'app-root',
@@ -18,15 +26,11 @@ export class App {
   protected readonly passwordPattern =
     '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9\\s]).*';
 
-  protected profile = {
-    name: '',
-    email: '',
-    age: null as number | null,
-  };
-
-  protected submittedProfile: typeof this.profile | null = null;
+  protected submittedProfile: SubmittedProfile | null = null;
 
   protected password = '';
+  protected learningGoal = '';
+  protected experienceLevel = '';
   student2 = new Student('', '', '');
   protected displayFormValue(form: NgForm): Record<string, unknown> {
     const { password, ...values } = form.value;
@@ -34,13 +38,16 @@ export class App {
   }
 
   protected onSubmit(form: NgForm): void {
-    console.log('++++++++++++++++++++ form: ', form);
-    const student1 = new Student(form.value.name, form.value.age, form.value.email);
-    console.log('++++++++++++++++++++ student1: ', student1);
-    if (form.invalid) {
+    if (form.invalid || form.pending) {
       return;
     }
 
-    this.submittedProfile = { ...this.profile };
+    this.submittedProfile = {
+      name: this.student2.name,
+      email: this.student2.email,
+      age: this.student2.age,
+      learningGoal: this.learningGoal,
+      experienceLevel: this.experienceLevel,
+    };
   }
 }

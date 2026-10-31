@@ -2,12 +2,14 @@
   <section class="form-card" aria-labelledby="form-title">
     <p class="eyebrow">Profile details</p>
     <h1 id="form-title">Tell us about yourself</h1>
-    <p class="intro">Enter your name, email, and age to get started.</p>
+    <p class="intro">
+      Enter your details, choose a learning goal, and select your experience level to get started.
+    </p>
 
     <form
       #profileForm="ngForm"
       (ngSubmit)="onSubmit(profileForm)"
-      ngNativeValidate
+      /* ngNativeValidate */
     >
       <section class="debug-values" aria-label="Current form values">
         <div class="debug-panel">
@@ -32,7 +34,7 @@
           [(ngModel)]="student2.name"
           /* [(ngModel)]="profile.name" */
           #nameControl="ngModel"
-          ngModel
+          /* ngModel */
           required
           minlength="3"
           maxlength="30"
@@ -61,7 +63,7 @@
           [(ngModel)]="student2.email"
           /* [(ngModel)]="profile.email" */
           #emailControl="ngModel"
-          ngModel
+          /* ngModel */
           appEmailAvailability
           required
           email
@@ -148,11 +150,68 @@
           [(ngModel)]="student2.age"
           /* [(ngModel)]="profile.age" */
           #ageControl="ngModel"
-          ngModel
+          /* ngModel */
           required
         />
         @if (ageControl.invalid && (ageControl.touched || profileForm.submitted)) {
           <p class="error" role="alert">Enter an age between 1 and 120.</p>
+        }
+      </div>
+
+      <fieldset class="field choice-field">
+        <legend>Learning goal</legend>
+        <label class="choice-option">
+          <input
+            type="radio"
+            name="learningGoal"
+            value="personal-project"
+            [(ngModel)]="learningGoal"
+            #learningGoalControl="ngModel"
+            required
+          />
+          Personal project
+        </label>
+        <label class="choice-option">
+          <input
+            type="radio"
+            name="learningGoal"
+            value="career-development"
+            [(ngModel)]="learningGoal"
+            required
+          />
+          Career development
+        </label>
+        <label class="choice-option">
+          <input
+            type="radio"
+            name="learningGoal"
+            value="academic-study"
+            [(ngModel)]="learningGoal"
+            required
+          />
+          Academic study
+        </label>
+        @if (learningGoalControl.invalid && (learningGoalControl.touched || profileForm.submitted)) {
+          <p class="error" role="alert">Choose a learning goal.</p>
+        }
+      </fieldset>
+
+      <div class="field">
+        <label for="experienceLevel">Experience level</label>
+        <select
+          id="experienceLevel"
+          name="experienceLevel"
+          [(ngModel)]="experienceLevel"
+          #experienceLevelControl="ngModel"
+          required
+        >
+          <option value="" disabled>Select your experience level</option>
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+        @if (experienceLevelControl.invalid && (experienceLevelControl.touched || profileForm.submitted)) {
+          <p class="error" role="alert">Select your experience level.</p>
         }
       </div>
 
@@ -205,6 +264,26 @@
             <span>{{ ageControl.pending }}</span>
           </div>
           <div class="state-row">
+            <span>Learning goal</span>
+            <span>{{ learningGoalControl.pristine }}</span>
+            <span>{{ learningGoalControl.dirty }}</span>
+            <span>{{ learningGoalControl.touched }}</span>
+            <span>{{ learningGoalControl.untouched }}</span>
+            <span>{{ learningGoalControl.valid }}</span>
+            <span>{{ learningGoalControl.invalid }}</span>
+            <span>{{ learningGoalControl.pending }}</span>
+          </div>
+          <div class="state-row">
+            <span>Experience level</span>
+            <span>{{ experienceLevelControl.pristine }}</span>
+            <span>{{ experienceLevelControl.dirty }}</span>
+            <span>{{ experienceLevelControl.touched }}</span>
+            <span>{{ experienceLevelControl.untouched }}</span>
+            <span>{{ experienceLevelControl.valid }}</span>
+            <span>{{ experienceLevelControl.invalid }}</span>
+            <span>{{ experienceLevelControl.pending }}</span>
+          </div>
+          <div class="state-row">
             <span>Password</span>
             <span>{{ passwordControl.pristine }}</span>
             <span>{{ passwordControl.dirty }}</span>
@@ -224,12 +303,15 @@
         </p>
       </section>
 
-      <button type="submit">Continue</button>
+      <button type="submit" [disabled]="profileForm.pending"
+       /* [disabled]="profileForm.invalid" */
+      >Continue</button>
     </form>
 
     @if (submittedProfile; as submitted) {
       <p class="success" role="status">
-        Thanks, {{ submitted.name }}. Your details have been submitted.
+        Thanks, {{ submitted.name }}. Your details have been submitted. Your learning goal is
+        {{ submitted.learningGoal }} and your experience level is {{ submitted.experienceLevel }}.
       </p>
     }
   </section>
