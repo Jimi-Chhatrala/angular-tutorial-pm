@@ -5,17 +5,39 @@
         <h2>Template Driven Form Simple</h2>
       </div>
       <form #newForm="ngForm" (ngSubmit)="save(newForm.value)">
+        {{ newForm.value | json }}
+        <hr />
+        {{ std | json }}
+        <hr />
         <div class="form-group">
           <label for="">Enter Name: </label>
-          <input type="text" name="name" class="form-control" placeholder="Enter Name" ngModel />
+          <input
+            type="text"
+            name="name"
+            [(ngModel)]="std.name"
+            class="form-control"
+            placeholder="Enter Name"
+          />
         </div>
         <div class="form-group">
           <label for="">Enter Age: </label>
-          <input type="number" name="age" class="form-control" placeholder="Enter Age" ngModel />
+          <input
+            type="number"
+            name="age"
+            [(ngModel)]="std.age"
+            class="form-control"
+            placeholder="Enter Age"
+          />
         </div>
         <div class="form-group">
           <label for="">Enter Email: </label>
-          <input type="text" name="email" class="form-control" placeholder="Enter Email" ngModel />
+          <input
+            type="text"
+            name="email"
+            [(ngModel)]="std.email"
+            class="form-control"
+            placeholder="Enter Email"
+          />
         </div>
         <br />
         <div class="d-grid">
