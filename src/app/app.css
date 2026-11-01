@@ -237,12 +237,17 @@ select:focus {
   overflow-wrap: anywhere;
 }
 
-button {
+.form-actions {
+  display: flex;
   grid-column: 1 / -1;
-  justify-self: end;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+button {
   min-width: 12rem;
   min-height: 3rem;
-  margin-top: 0.25rem;
   border: 0;
   border-radius: 0.625rem;
   background: #2563eb;
@@ -311,8 +316,11 @@ button:disabled {
 
   .field,
   .debug-values,
-  .state-examples,
-  button {
+  .state-examples {
+    grid-column: 1;
+  }
+
+  .form-actions {
     grid-column: 1;
   }
 
@@ -320,7 +328,8 @@ button:disabled {
     padding: 1rem;
   }
 
-  button {
-    width: 100%;
+  .form-actions button {
+    flex: 1;
+    min-width: 0;
   }
 }

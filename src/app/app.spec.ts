@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { By } from '@angular/platform-browser';
-import { NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -143,6 +143,54 @@ describe('App', () => {
     expect(compiled.querySelector('.debug-panel pre')?.textContent).toContain(
       '"learningTopics": [',
     );
+  });
+
+  it('should reset all form fields, checkbox selections, and submitted state', async () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const name = compiled.querySelector<HTMLInputElement>('input[name="name"]')!;
+    const email = compiled.querySelector<HTMLInputElement>('input[name="email"]')!;
+    const emailUpdates = compiled.querySelector<HTMLInputElement>('input[name="emailUpdates"]')!;
+    const termsAccepted = compiled.querySelector<HTMLInputElement>('input[name="termsAccepted"]')!;
+    const topic = compiled.querySelector<HTMLInputElement>('input[name="topic-components"]')!;
+
+    name.value = 'Alex Morgan';
+    name.dispatchEvent(new Event('input', { bubbles: true }));
+    email.value = 'not-an-email';
+    email.dispatchEvent(new Event('input', { bubbles: true }));
+    emailUpdates.checked = true;
+    emailUpdates.dispatchEvent(new Event('change', { bubbles: true }));
+    termsAccepted.checked = true;
+    termsAccepted.dispatchEvent(new Event('change', { bubbles: true }));
+    topic.checked = true;
+    topic.dispatchEvent(new Event('change', { bubbles: true }));
+    name.dispatchEvent(new Event('blur'));
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    compiled.querySelector<HTMLButtonElement>('button[type="button"]')!.click();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(name.value).toBe('');
+    expect(email.value).toBe('');
+    expect(compiled.querySelector<HTMLInputElement>('input[name="password"]')!.value).toBe('');
+    expect(emailUpdates.checked).toBe(false);
+    expect(termsAccepted.checked).toBe(false);
+    expect(topic.checked).toBe(false);
+    expect(compiled.querySelector<HTMLSelectElement>('select[name="experienceLevel"]')!.value).toBe(
+      '',
+    );
+    expect(compiled.querySelector('.debug-panel pre')?.textContent).toContain('"learningTopics": []');
+    expect(compiled.textContent).not.toContain('Please agree to the terms.');
+
+    const form = fixture.debugElement.query(By.css('form')).injector.get(NgForm);
+    expect(form.pristine).toBe(true);
+    expect(form.untouched).toBe(true);
+    expect(compiled.querySelector('[role="status"]')).toBeNull();
   });
 
   it('should disable submission while email availability is pending', async () => {

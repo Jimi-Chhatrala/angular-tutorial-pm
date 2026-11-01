@@ -375,9 +375,14 @@
         </p>
       </section>
 
-      <button type="submit" [disabled]="profileForm.pending"
-       /* [disabled]="profileForm.invalid" */
-      >Continue</button>
+      <div class="form-actions">
+        <button type="button" (click)="onReset(profileForm)">
+          Reset form
+        </button>
+        <button type="submit" [disabled]="profileForm.pending"
+         /* [disabled]="profileForm.invalid" */
+        >Continue</button>
+      </div>
     </form>
 
     @if (submittedProfile; as submitted) {

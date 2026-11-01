@@ -58,6 +58,18 @@ export class App {
     this.selectedTopics = checked ? [...this.learningTopics] : [];
   }
 
+  protected onReset(form: NgForm): void {
+    this.student2 = new Student('', '', '');
+    this.password = '';
+    this.learningGoal = '';
+    this.experienceLevel = '';
+    this.emailUpdates = false;
+    this.termsAccepted = false;
+    this.selectedTopics = [];
+    this.submittedProfile = null;
+    form.resetForm();
+  }
+
   protected displayFormValue(form: NgForm): Record<string, unknown> {
     const { password, ...values } = form.value;
     return {
