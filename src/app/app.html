@@ -4,7 +4,7 @@
       <div class="bg-primary p-3 text-center">
         <h2>Template Driven Form Simple</h2>
       </div>
-      <form #newForm="ngForm" (ngSubmit)="save(newForm.value)">
+      <form #newForm="ngForm" (ngSubmit)="save(newForm.value)" novalidate>
         {{ newForm.value | json }}
         <hr />
         {{ std | json }}
@@ -13,35 +13,100 @@
           <label for="">Enter Name: </label>
           <input
             type="text"
+            [class.is-invalid]="name.touched && name.invalid"
             name="name"
             [(ngModel)]="std.name"
             class="form-control"
             placeholder="Enter Name"
+            #name="ngModel"
+            required
+            minlength="3"
+            maxlength="15"
           />
         </div>
+        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+          <div *ngIf="name.errors && name.errors['required']">Name is Required</div>
+          <div *ngIf="name.errors && name.errors['minlength']">3 Characters Must</div>
+        </div>
+        Touched: {{ name.touched }}
+        <br />
+        Untouched: {{ name.untouched }}
+        <br />
+        Valid: {{ name.valid }}
+        <br />
+        Invalid: {{ name.invalid }}
+        <br />
+        Dirty: {{ name.dirty }}
+        <br />
+        Pristine: {{ name.pristine }}
         <div class="form-group">
           <label for="">Enter Age: </label>
           <input
             type="number"
+            [class.is-invalid]="age.touched && age.invalid"
             name="age"
             [(ngModel)]="std.age"
             class="form-control"
             placeholder="Enter Age"
+            #age="ngModel"
+            required
+            min="10"
+            max="50"
           />
+        </div>
+        <div class="alert alert-danger" *ngIf="age.touched && age.invalid">
+          <div *ngIf="age.errors && age.errors['required']">Age is Required</div>
+          <div *ngIf="age.errors && age.errors['min']">Age must be greater or equal to 10</div>
+          <div *ngIf="age.errors && age.errors['max']">Age must be lesser or equal to 50</div>
         </div>
         <div class="form-group">
           <label for="">Enter Email: </label>
           <input
             type="text"
+            [class.is-invalid]="email.touched && email.invalid"
             name="email"
             [(ngModel)]="std.email"
             class="form-control"
             placeholder="Enter Email"
+            #email="ngModel"
+            required
+            /* email */
+            pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
           />
+        </div>
+        <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+          <div *ngIf="email.errors && email.errors['required']">Email is Required</div>
+          <!-- <div *ngIf="email.errors && email.errors['email']">
+            Invalid Email
+          </div> -->
+          <div *ngIf="email.errors && email.errors['pattern']">Invalid Email</div>
+        </div>
+        <div class="form-group">
+          <label for="">Enter Password: </label>
+          <input
+            type="text"
+            [class.is-invalid]="password.touched && password.invalid"
+            name="password"
+            [(ngModel)]="std.password"
+            class="form-control"
+            placeholder="Enter Password"
+            #password="ngModel"
+            required
+            pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+          />
+        </div>
+        <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+          <div *ngIf="password.errors && password.errors['required']">Password is Required</div>
+          <div *ngIf="password.errors && password.errors['pattern']">Invalid Password</div>
         </div>
         <br />
         <div class="d-grid">
-          <input type="submit" value="Submit" class="btn btn-primary" />
+          <input
+            type="submit"
+            [class.disabled]="newForm.form.invalid"
+            value="Submit"
+            class="btn btn-primary"
+          />
         </div>
       </form>
     </div>
