@@ -9,5 +9,6 @@ export class Student {
     public password?: string,
     public gender?: string,
     public country?: string,
+    public accept?: boolean,
   ) {}
 }

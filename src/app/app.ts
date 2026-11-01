@@ -12,6 +12,20 @@ import { Student } from './student';
 export class App {
   protected readonly title = signal('angular-tutorial-pm');
 
+  SelectedHobbies: string[] = [];
+
+  onChange(e: any) {
+    let selectedValue = e.target.value;
+    let checked = e.target.checked;
+
+    if (checked) {
+      this.SelectedHobbies.push(selectedValue);
+    } else {
+      let index = this.SelectedHobbies.indexOf(selectedValue);
+      this.SelectedHobbies.splice(index, 1);
+    }
+  }
+
   std = new Student();
 
   constructor() {
@@ -23,5 +37,6 @@ export class App {
     // const std = new Student(formData.name, formData.age, formData.email);
     // console.log('++++++++++++++++++++ std: ', std);
     console.log('++++++++++++++++++++ this.std: ', this.std);
+    console.log('++++++++++++++++++++ this.SelectedHobbies: ', this.SelectedHobbies);
   }
 }

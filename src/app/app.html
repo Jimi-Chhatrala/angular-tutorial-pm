@@ -147,10 +147,54 @@
           <div *ngIf="country.errors && country.errors['required']">Country is Required</div>
         </div>
         <br />
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            required
+            name="accept"
+            #accept="ngModel"
+            [(ngModel)]="std.accept"
+          />
+          <label for="">I Accept Terms & Conditions</label>
+        </div>
+        <hr />
+        <label for="">Select Hobbies</label>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            (change)="onChange($event)"
+            class="form-check-input"
+            name="hobbies"
+            value="Singing"
+          />
+          <label for="">Singing</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            (change)="onChange($event)"
+            class="form-check-input"
+            name="hobbies"
+            value="Dancing"
+          />
+          <label for="">Dancing</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            (change)="onChange($event)"
+            class="form-check-input"
+            name="hobbies"
+            value="Reading"
+          />
+          <label for="">Reading</label>
+        </div>
+        <hr />
         <div class="d-grid">
           <input
             type="submit"
-            [class.disabled]="newForm.form.invalid"
+            [class.disabled]="newForm.form.invalid || SelectedHobbies.length == 0"
             value="Submit"
             class="btn btn-primary"
           />
