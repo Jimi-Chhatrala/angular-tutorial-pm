@@ -1,6 +1,6 @@
 import { JsonPipe, NgIf } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Student } from './student';
 
 @Component({
@@ -11,6 +11,10 @@ import { Student } from './student';
 })
 export class App {
   protected readonly title = signal('angular-tutorial-pm');
+
+  resetForm(my_form: NgForm) {
+    my_form.resetForm();
+  }
 
   SelectedHobbies: string[] = [];
 
@@ -38,5 +42,6 @@ export class App {
     // console.log('++++++++++++++++++++ std: ', std);
     console.log('++++++++++++++++++++ this.std: ', this.std);
     console.log('++++++++++++++++++++ this.SelectedHobbies: ', this.SelectedHobbies);
+    // formData.reset();
   }
 }

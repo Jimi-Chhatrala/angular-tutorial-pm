@@ -167,6 +167,7 @@
             class="form-check-input"
             name="hobbies"
             value="Singing"
+            ngModel
           />
           <label for="">Singing</label>
         </div>
@@ -177,6 +178,7 @@
             class="form-check-input"
             name="hobbies"
             value="Dancing"
+            ngModel
           />
           <label for="">Dancing</label>
         </div>
@@ -187,6 +189,7 @@
             class="form-check-input"
             name="hobbies"
             value="Reading"
+            ngModel
           />
           <label for="">Reading</label>
         </div>
@@ -198,6 +201,8 @@
             value="Submit"
             class="btn btn-primary"
           />
+          <br />
+          <button type="button" class="btn btn-danger" (click)="resetForm(newForm)">Reset</button>
         </div>
       </form>
     </div>
