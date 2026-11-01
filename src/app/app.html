@@ -215,6 +215,58 @@
         }
       </div>
 
+      <fieldset class="field choice-field">
+        <legend>Checkbox controls</legend>
+        <label class="choice-option">
+          <input
+            type="checkbox"
+            name="emailUpdates"
+            [(ngModel)]="emailUpdates"
+            #emailUpdatesControl="ngModel"
+          />
+          Email me learning tips and updates
+        </label>
+        <label class="choice-option">
+          <input
+            type="checkbox"
+            name="termsAccepted"
+            [(ngModel)]="termsAccepted"
+            #termsAcceptedControl="ngModel"
+            required
+          />
+          I agree to the terms
+        </label>
+        @if (termsAcceptedControl.invalid && (termsAcceptedControl.touched || profileForm.submitted)) {
+          <p class="error" role="alert">Please agree to the terms.</p>
+        }
+      </fieldset>
+
+      <fieldset class="field choice-field">
+        <legend>Topics to learn</legend>
+        <p class="state-hint">Choose any number of topics. {{ selectedTopics.length }} selected.</p>
+        <label class="choice-option">
+          <input
+            type="checkbox"
+            name="selectAllTopics"
+            [ngModel]="allTopicsSelected"
+            (ngModelChange)="toggleAllTopics($event)"
+            [indeterminate]="someTopicsSelected"
+          />
+          Select all topics
+        </label>
+        @for (topic of learningTopics; track topic) {
+          <label class="choice-option">
+            <input
+              type="checkbox"
+              [name]="'topic-' + topic"
+              [ngModel]="selectedTopics.includes(topic)"
+              (ngModelChange)="setTopicSelected(topic, $event)"
+            />
+            {{ topic | titlecase }}
+          </label>
+        }
+      </fieldset>
+
       <section class="state-examples" aria-labelledby="state-title">
         <h2 id="state-title">Form control state examples</h2>
         <p class="state-hint">
@@ -284,6 +336,26 @@
             <span>{{ experienceLevelControl.pending }}</span>
           </div>
           <div class="state-row">
+            <span>Email updates</span>
+            <span>{{ emailUpdatesControl.pristine }}</span>
+            <span>{{ emailUpdatesControl.dirty }}</span>
+            <span>{{ emailUpdatesControl.touched }}</span>
+            <span>{{ emailUpdatesControl.untouched }}</span>
+            <span>{{ emailUpdatesControl.valid }}</span>
+            <span>{{ emailUpdatesControl.invalid }}</span>
+            <span>{{ emailUpdatesControl.pending }}</span>
+          </div>
+          <div class="state-row">
+            <span>Terms agreement</span>
+            <span>{{ termsAcceptedControl.pristine }}</span>
+            <span>{{ termsAcceptedControl.dirty }}</span>
+            <span>{{ termsAcceptedControl.touched }}</span>
+            <span>{{ termsAcceptedControl.untouched }}</span>
+            <span>{{ termsAcceptedControl.valid }}</span>
+            <span>{{ termsAcceptedControl.invalid }}</span>
+            <span>{{ termsAcceptedControl.pending }}</span>
+          </div>
+          <div class="state-row">
             <span>Password</span>
             <span>{{ passwordControl.pristine }}</span>
             <span>{{ passwordControl.dirty }}</span>
@@ -312,6 +384,8 @@
       <p class="success" role="status">
         Thanks, {{ submitted.name }}. Your details have been submitted. Your learning goal is
         {{ submitted.learningGoal }} and your experience level is {{ submitted.experienceLevel }}.
+        Email updates: {{ submitted.emailUpdates ? 'yes' : 'no' }}.
+        Topics: {{ submitted.learningTopics.join(', ') || 'none' }}.
       </p>
     }
   </section>

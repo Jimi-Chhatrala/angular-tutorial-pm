@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Student } from './student';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, TitleCasePipe } from '@angular/common';
 import {
   COMPLETE_EMAIL_PATTERN,
   EmailAvailabilityValidator,
@@ -13,10 +13,13 @@ interface SubmittedProfile {
   age: number | string;
   learningGoal: string;
   experienceLevel: string;
+  emailUpdates: boolean;
+  termsAccepted: boolean;
+  learningTopics: string[];
 }
 
 @Component({
-  imports: [FormsModule, JsonPipe, EmailAvailabilityValidator],
+  imports: [FormsModule, JsonPipe, TitleCasePipe, EmailAvailabilityValidator],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
@@ -31,10 +34,37 @@ export class App {
   protected password = '';
   protected learningGoal = '';
   protected experienceLevel = '';
+  protected emailUpdates = false;
+  protected termsAccepted = false;
+  protected readonly learningTopics = ['components', 'forms', 'services', 'routing'];
+  protected selectedTopics: string[] = [];
   student2 = new Student('', '', '');
+
+  protected get allTopicsSelected(): boolean {
+    return this.learningTopics.every((topic) => this.selectedTopics.includes(topic));
+  }
+
+  protected get someTopicsSelected(): boolean {
+    return this.selectedTopics.length > 0 && !this.allTopicsSelected;
+  }
+
+  protected setTopicSelected(topic: string, checked: boolean): void {
+    this.selectedTopics = checked
+      ? [...new Set([...this.selectedTopics, topic])]
+      : this.selectedTopics.filter((selectedTopic) => selectedTopic !== topic);
+  }
+
+  protected toggleAllTopics(checked: boolean): void {
+    this.selectedTopics = checked ? [...this.learningTopics] : [];
+  }
+
   protected displayFormValue(form: NgForm): Record<string, unknown> {
     const { password, ...values } = form.value;
-    return { ...values, password: password ? '[hidden]' : '' };
+    return {
+      ...values,
+      learningTopics: [...this.selectedTopics],
+      password: password ? '[hidden]' : '',
+    };
   }
 
   protected onSubmit(form: NgForm): void {
@@ -48,6 +78,9 @@ export class App {
       age: this.student2.age,
       learningGoal: this.learningGoal,
       experienceLevel: this.experienceLevel,
+      emailUpdates: this.emailUpdates,
+      termsAccepted: this.termsAccepted,
+      learningTopics: [...this.selectedTopics],
     };
   }
 }
