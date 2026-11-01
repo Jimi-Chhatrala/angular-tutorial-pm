@@ -12,8 +12,12 @@ import { Student } from './student';
 export class App {
   protected readonly title = signal('angular-tutorial-pm');
 
-  constructor() {}
   std = new Student();
+
+  constructor() {
+    this.std.country = '';
+  }
+
   save(formData: any) {
     // console.log('++++++++++++++++++++ formData: ', formData);
     // const std = new Student(formData.name, formData.age, formData.email);

@@ -7,5 +7,7 @@ export class Student {
     public age?: number,
     public email?: string,
     public password?: string,
+    public gender?: string,
+    public country?: string,
   ) {}
 }

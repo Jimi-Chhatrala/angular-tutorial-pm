@@ -27,6 +27,7 @@
         <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
           <div *ngIf="name.errors && name.errors['required']">Name is Required</div>
           <div *ngIf="name.errors && name.errors['minlength']">3 Characters Must</div>
+          <div *ngIf="name.errors && name.errors['maxlength']">15 Characters Max</div>
         </div>
         Touched: {{ name.touched }}
         <br />
@@ -98,6 +99,52 @@
         <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
           <div *ngIf="password.errors && password.errors['required']">Password is Required</div>
           <div *ngIf="password.errors && password.errors['pattern']">Invalid Password</div>
+        </div>
+        <br />
+        <label for="">Gender</label>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            required
+            value="Male"
+            #gender="ngModel"
+            [(ngModel)]="std.gender"
+            name="gender"
+          />
+          <label for="">Male</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            required
+            value="Female"
+            #gender="ngModel"
+            [(ngModel)]="std.gender"
+            name="gender"
+          />
+          <label for="">Female</label>
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="">Country</label>
+          <select
+            name="country"
+            class="form-control"
+            [class.is-invalid]="country.touched && country.invalid"
+            required
+            #country="ngModel"
+            [(ngModel)]="std.country"
+          >
+            <option value="" selected>Select</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="Australia">Australia</option>
+          </select>
+        </div>
+        <div class="alert alert-danger" *ngIf="country.touched && country.invalid">
+          <div *ngIf="country.errors && country.errors['required']">Country is Required</div>
         </div>
         <br />
         <div class="d-grid">
