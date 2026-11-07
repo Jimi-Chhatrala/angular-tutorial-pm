@@ -7,19 +7,81 @@
       <form [formGroup]="signupForm" (ngSubmit)="handleSubmit()">
         <div class="form-group">
           <label for="">Enter Name:</label>
-          <input type="text" name="name" class="form-control" formControlName="name" />
+          <input
+            type="text"
+            name="name"
+            [class.is-invalid]="f['name'].invalid && f['name'].touched"
+            class="form-control"
+            formControlName="name"
+          />
         </div>
+        <div class="alert alert-danger" *ngIf="f['name'].invalid && f['name'].touched">
+          <div *ngIf="f['name'].errors && f['name'].errors['required']">Name is required.</div>
+          <div *ngIf="f['name'].errors && f['name'].errors['minlength']">3 characters minimum.</div>
+          <div *ngIf="f['name'].errors && f['name'].errors['maxlength']">
+            20 characters maximum.
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="">Enter Age:</label>
-          <input type="number" name="age" class="form-control" formControlName="age" />
+          <input
+            type="number"
+            name="age"
+            [class.is-invalid]="f['age'].invalid && f['age'].touched"
+            class="form-control"
+            formControlName="age"
+          />
         </div>
+        <div class="alert alert-danger" *ngIf="f['age'].invalid && f['age'].touched">
+          <div *ngIf="f['age'].errors && f['age'].errors['required']">Age is required.</div>
+          <div *ngIf="f['age'].errors && f['age'].errors['min']">Minimum age is 10.</div>
+          <div *ngIf="f['age'].errors && f['age'].errors['max']">Maximum age is 50.</div>
+        </div>
+
         <div class="form-group">
           <label for="">Enter Email:</label>
-          <input type="email" name="email" class="form-control" formControlName="email" />
+          <input
+            type="email"
+            name="email"
+            [class.is-invalid]="f['email'].invalid && f['email'].touched"
+            class="form-control"
+            formControlName="email"
+          />
         </div>
+        <div class="alert alert-danger" *ngIf="f['email'].invalid && f['email'].touched">
+          <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
+          <div *ngIf="f['email'].errors && f['email'].errors['pattern']">Invalid email.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="">Enter Password:</label>
+          <input
+            type="text"
+            name="password"
+            [class.is-invalid]="f['password'].invalid && f['password'].touched"
+            class="form-control"
+            formControlName="password"
+          />
+        </div>
+        <div class="alert alert-danger" *ngIf="f['password'].invalid && f['password'].touched">
+          <div *ngIf="f['password'].errors && f['password'].errors['required']">
+            Password is required.
+          </div>
+          <div *ngIf="f['password'].errors && f['password'].errors['pattern']">
+            Invalid password.
+          </div>
+        </div>
+
         <br />
+
         <div class="d-grid">
-          <input type="submit" value="Submit" class="btn btn-primary" />
+          <input
+            type="submit"
+            [class.disabled]="signupForm.invalid"
+            value="Submit"
+            class="btn btn-primary"
+          />
         </div>
       </form>
     </div>
