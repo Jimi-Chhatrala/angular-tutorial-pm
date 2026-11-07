@@ -88,3 +88,4 @@ ng add tailwindcss
 # 21-fetch-and-display-data-by-calling-api
 # 22-template-driven-forms
 # 23-template-driven-forms-simple
+# 24-reactive-forms
