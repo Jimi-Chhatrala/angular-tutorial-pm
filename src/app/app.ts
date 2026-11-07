@@ -28,6 +28,8 @@ export class App {
       Validators.required,
       Validators.pattern('(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'),
     ]),
+    gender: new FormControl('', [Validators.required]),
+    country: new FormControl('', [Validators.required]),
   });
 
   handleSubmit() {
