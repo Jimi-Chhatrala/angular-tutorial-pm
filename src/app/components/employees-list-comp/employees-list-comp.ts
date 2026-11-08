@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   imports: [NgFor],
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './employees-list-comp.html',
 })
 export class EmployeesListComp {
+  selectedID: any;
   MyEmployees = [
     { id: 1, name: 'Abc' },
     { id: 2, name: 'Def' },
@@ -17,9 +18,24 @@ export class EmployeesListComp {
     { id: 5, name: 'Mno' },
   ];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+  ) {}
 
   EmpClick(employee: any) {
-    this.router.navigate(['/employees', employee.id, employee.name]);
+    // this.router.navigate(['/employees', employee.id, employee.name]);
+    this.router.navigate(['/employees', employee.id]);
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+      let id = params.get('id');
+      this.selectedID = id;
+    });
+  }
+
+  isSelected(employee: any) {
+    return parseInt(employee.id) === parseInt(this.selectedID);
   }
 }

@@ -4,7 +4,8 @@
 <ul class="list-group">
   <li
     (click)="EmpClick(employee)"
-    class="list-group-item bg-dark text-white"
+    [class.selected]="isSelected(employee)"
+    class="list-group-item"
     *ngFor="let employee of MyEmployees"
   >
     {{ employee.id }} - {{ employee.name }}
