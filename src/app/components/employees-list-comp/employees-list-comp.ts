@@ -20,6 +20,6 @@ export class EmployeesListComp {
   constructor(private router: Router) {}
 
   EmpClick(employee: any) {
-    this.router.navigate(['/employees', employee.id]);
+    this.router.navigate(['/employees', employee.id, employee.name]);
   }
 }

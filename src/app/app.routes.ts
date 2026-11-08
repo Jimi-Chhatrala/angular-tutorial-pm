@@ -30,7 +30,7 @@ export const routes: Routes = [
     component: EmployeesListComp,
   },
   {
-    path: 'employees/:id',
+    path: 'employees/:id/:name',
     component: EmployeeDetailsComp,
   },
   {
