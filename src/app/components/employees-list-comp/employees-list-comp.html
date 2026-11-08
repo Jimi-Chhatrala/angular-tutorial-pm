@@ -1,0 +1,12 @@
+<h1>Employees List Page</h1>
+<p>employees-list-comp works!</p>
+
+<ul class="list-group">
+  <li
+    (click)="EmpClick(employee)"
+    class="list-group-item bg-dark text-white"
+    *ngFor="let employee of MyEmployees"
+  >
+    {{ employee.id }} - {{ employee.name }}
+  </li>
+</ul>
