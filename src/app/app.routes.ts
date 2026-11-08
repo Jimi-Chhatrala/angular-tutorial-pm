@@ -2,8 +2,15 @@ import { Routes } from '@angular/router';
 import { HomeComp } from './components/home-comp/home-comp';
 import { AboutComp } from './components/about-comp/about-comp';
 import { ContactComp } from './components/contact-comp/contact-comp';
+import { PageNotFoundComp } from './components/page-not-found-comp/page-not-found-comp';
 
 export const routes: Routes = [
+  {
+    path: '',
+    // component: HomeComp,
+    redirectTo: '/home',
+    pathMatch: 'full',
+  },
   {
     path: 'home',
     component: HomeComp,
@@ -15,5 +22,9 @@ export const routes: Routes = [
   {
     path: 'contact',
     component: ContactComp,
+  },
+  {
+    path: '**',
+    component: PageNotFoundComp,
   },
 ];
