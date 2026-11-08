@@ -90,3 +90,4 @@ ng add tailwindcss
 # 23-template-driven-forms-simple
 # 24-reactive-forms
 # 25-custom-directive
+# 26-routing-and-navigation
