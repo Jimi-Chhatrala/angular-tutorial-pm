@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChangeMeDirective } from './shared/change-me.directive';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [ChangeMeDirective],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

@@ -15,10 +15,13 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should apply the change-me directive to the heading', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular-tutorial-pm');
+    const heading = compiled.querySelector('h1');
+
+    expect(heading?.textContent).toContain('Hello World');
+    expect(heading?.style.color).toBe('red');
   });
 });
