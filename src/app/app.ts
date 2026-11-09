@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CourseCardComp } from './components/course-card-comp/course-card-comp';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [CourseCardComp],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
