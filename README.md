@@ -91,3 +91,4 @@ ng add tailwindcss
 # 24-reactive-forms
 # 25-custom-directive
 # 26-routing-and-navigation
+# 27-content-projection-using-ng-content
