@@ -29,6 +29,21 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="employees">Employees List</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="courses">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="[{ outlets: { courses_details: ['coursesDetails'] } }]"
+            >Courses Details</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="[{ outlets: { courses_details_2: ['coursesDetails2'] } }]"
+            >Courses Details 2</a
+          >
+        </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -58,7 +73,7 @@
   </div>
 </nav>
 
-<h1>Routing in Angular</h1>
+<!-- <h1>Routing in Angular</h1> -->
 
 <!-- <a routerLink="home">Home</a> -->
 <!-- <br /> -->
@@ -71,3 +86,5 @@
 <!-- <a routerLink="employees">Employees List</a> -->
 
 <router-outlet></router-outlet>
+<router-outlet name="courses_details"></router-outlet>
+<router-outlet name="courses_details_2"></router-outlet>
