@@ -92,3 +92,4 @@ ng add tailwindcss
 # 25-custom-directive
 # 26-routing-and-navigation
 # 27-content-projection-using-ng-content
+# 28-ng-template
