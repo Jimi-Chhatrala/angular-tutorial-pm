@@ -5,8 +5,12 @@
 &nbsp;
 <a routerLink="bottom">Bottom</a> -->
 
-<button class="btn btn-primary" routerLink="top">Top</button>
+<!-- <button class="btn btn-primary" routerLink="top">Top</button>
 &nbsp;
-<button class="btn btn-primary" routerLink="bottom">Bottom</button>
+<button class="btn btn-primary" routerLink="bottom">Bottom</button> -->
+
+<button class="btn btn-primary" (click)="showTopProducts()">Top</button>
+&nbsp;
+<button class="btn btn-primary" (click)="showBottomProducts()">Bottom</button>
 
 <router-outlet></router-outlet>
